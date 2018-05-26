@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+
+    <link rel="stylesheet" href="libs/style.css">
+</head>
+<body>
+	<div class="container">
+		<ul class="list">
+			<!-- <li>
+				<img src="http://s3.mogucdn.com/mlcdn/55cf19/180130_3fdkf93f4b7a65d2d1546h9lag74i_640x960.jpg">
+				<h3>1111111</h3>
+				<button>我是id</button>
+			</li> -->
+		</ul>
+	</div>
+<script src="libs/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+	$(function(){
+		function Shop(url,item_main,button_main){
+			this.url = url;
+			this.item_main = $(item_main);
+			this.init();
+		}
+		Shop.prototype = {
+			constructor:Shop,
+			init(){
+				this.loading()
+				.then(function(res){
+					this.json = res.data.list;
+					this.renderPage();
+
+				}.bind(this));
+				// this.button_main.on("click",$.proxy(this.))
+			},
+			loading(){
+				// 加载数据
+				var opt = {
+					url:this.url,
+					dataType:"jsonp",
+					data:{page:this.page},
+
+				}
+				return $.ajax(opt);
+
+			},
+			renderPage(){
+				// 渲染页面
+				var html = "";
+				this.json.forEach(function(item){
+					html += `
+						<li>
+							<img src="${item.image}">
+							<h3>${item.title}</h3>
+							<button data-id=${item.item_id}>我是id</button>
+						</li>
+
+						`
+				}.bind(this));
+				this.item_main.append($(html));
+				this.item_main.find("button").on("click",$.proxy(this.buttonClick,this));
+
+			},
+			buttonClick(event){
+				// 获取点击事件的事件源
+				var target = event.target || event.srcElement;
+				// console.log(target);
+				// 获取商品id
+				// 点击按钮获取id号并在控制台查看
+				var productId = $(target).attr("data-id");
+				console.log("该商品id号：",productId);
+				// 获取商品名称
+				var productName = $(target).siblings("h3").html();
+				// console.log(productName);
+				// 获取商品图片
+				var productImg = $(target).siblings("img").attr("src");
+				// console.log(productImg);
+				// 将商品id放入cookie中
+
+			}
+
+
+		}
+		new Shop("http://mce.meilishuo.com/jsonp/get/3?offset=0&frame=1&trace=0&limit=10&endId=0&pid=106888&_=1526528205879",".list");
+	})
+</script>
+</body>
+</html>

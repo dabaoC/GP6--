@@ -1,0 +1,62 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+li{
+	list-style: none;
+}
+.wrap{
+	margin:120px auto;
+	width:450px;
+	height: 300px;
+	position: relative;
+	border-radius: 20px;
+	overflow: hidden;
+
+}
+.wrap ul{
+	position: relative;
+	width: 450px;
+	height: 300px;
+}
+.wrap ul li{
+	width: 450px;
+	height: 300px;
+	position: absolute;
+	overflow: hidden;
+	display: none;
+}
+.wrap ul li img{
+	width: 450px;
+	height: 300px;
+}
+/*左按钮*/
+#next,#prev{
+	position: absolute;
+	display: block;
+	width: 40px;
+	height: 60px;
+	left: 0;
+	top: 120px;
+	z-index: 1000;
+	/*opacity: 0;*/
+	/*filter:alpha(opacity:0);*/
+	background: #ddd;
+	border-radius: 0 50% 50% 0;
+	box-shadow: 0 0 5px #fff;
+}
+#next{
+	border-radius: 50% 0 0 50%;
+	left: 410px;
+}
+
+
+
+
+
+
+
+
+
+
+
